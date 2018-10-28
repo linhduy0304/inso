@@ -1,0 +1,16 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+    </style>
+     <style name="LoginThemeYellow" parent="Theme.AccountKit">
+    <item name="com_accountkit_primary_color">#0bc5b8</item>
+    <item name="com_accountkit_primary_text_color">#fff</item>
+    <item name="com_accountkit_secondary_text_color">#333</item>
+    <item name="com_accountkit_status_bar_color">#0bc5b8</item>
+
+    <item name="com_accountkit_input_accent_color">#f44242</item>
+    <item name="com_accountkit_input_border_color">#0bc5b8</item>
+    </style>
+</resources>

@@ -1,0 +1,149 @@
+PODS:
+  - AccountKit (4.35.0)
+  - boost-for-react-native (1.63.0)
+  - BVLinearGradient (2.4.2):
+    - React
+  - DoubleConversion (1.1.5)
+  - Folly (2016.10.31.00):
+    - boost-for-react-native
+    - DoubleConversion
+    - glog
+  - glog (0.3.4)
+  - React (0.56.0):
+    - React/Core (= 0.56.0)
+  - react-native-camera (1.3.0):
+    - React
+    - react-native-camera/RCT (= 1.3.0)
+    - react-native-camera/RN (= 1.3.0)
+  - react-native-camera/RCT (1.3.0):
+    - React
+  - react-native-camera/RN (1.3.0):
+    - React
+  - react-native-image-resizer (1.0.0):
+    - React
+  - React/Core (0.56.0):
+    - yoga (= 0.56.0.React)
+  - React/CxxBridge (0.56.0):
+    - Folly (= 2016.10.31.00)
+    - React/Core
+    - React/cxxreact
+  - React/cxxreact (0.56.0):
+    - boost-for-react-native (= 1.63.0)
+    - Folly (= 2016.10.31.00)
+    - React/jschelpers
+    - React/jsinspector
+  - React/DevSupport (0.56.0):
+    - React/Core
+    - React/RCTWebSocket
+  - React/fishhook (0.56.0)
+  - React/jschelpers (0.56.0):
+    - Folly (= 2016.10.31.00)
+    - React/PrivateDatabase
+  - React/jsinspector (0.56.0)
+  - React/PrivateDatabase (0.56.0)
+  - React/RCTActionSheet (0.56.0):
+    - React/Core
+  - React/RCTAnimation (0.56.0):
+    - React/Core
+  - React/RCTBlob (0.56.0):
+    - React/Core
+  - React/RCTGeolocation (0.56.0):
+    - React/Core
+  - React/RCTImage (0.56.0):
+    - React/Core
+    - React/RCTNetwork
+  - React/RCTLinkingIOS (0.56.0):
+    - React/Core
+  - React/RCTNetwork (0.56.0):
+    - React/Core
+  - React/RCTSettings (0.56.0):
+    - React/Core
+  - React/RCTText (0.56.0):
+    - React/Core
+  - React/RCTVibration (0.56.0):
+    - React/Core
+  - React/RCTWebSocket (0.56.0):
+    - React/Core
+    - React/fishhook
+    - React/RCTBlob
+  - RNAccountKit (0.10.1):
+    - AccountKit
+    - React
+  - RNDeviceInfo (0.21.5):
+    - React
+  - RNSVG (7.0.3):
+    - React
+  - yoga (0.56.0.React)
+
+DEPENDENCIES:
+  - BVLinearGradient (from `../node_modules/react-native-linear-gradient`)
+  - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
+  - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
+  - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
+  - react-native-camera (from `../node_modules/react-native-camera`)
+  - react-native-image-resizer (from `../node_modules/react-native-image-resizer`)
+  - React/Core (from `../node_modules/react-native`)
+  - React/CxxBridge (from `../node_modules/react-native`)
+  - React/DevSupport (from `../node_modules/react-native`)
+  - React/RCTActionSheet (from `../node_modules/react-native`)
+  - React/RCTAnimation (from `../node_modules/react-native`)
+  - React/RCTGeolocation (from `../node_modules/react-native`)
+  - React/RCTImage (from `../node_modules/react-native`)
+  - React/RCTLinkingIOS (from `../node_modules/react-native`)
+  - React/RCTNetwork (from `../node_modules/react-native`)
+  - React/RCTSettings (from `../node_modules/react-native`)
+  - React/RCTText (from `../node_modules/react-native`)
+  - React/RCTVibration (from `../node_modules/react-native`)
+  - React/RCTWebSocket (from `../node_modules/react-native`)
+  - RNAccountKit (from `../node_modules/react-native-facebook-account-kit/ios`)
+  - RNDeviceInfo (from `../node_modules/react-native-device-info`)
+  - RNSVG (from `../node_modules/react-native-svg`)
+  - yoga (from `../node_modules/react-native/ReactCommon/yoga/yoga.podspec`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - AccountKit
+    - boost-for-react-native
+
+EXTERNAL SOURCES:
+  BVLinearGradient:
+    :path: "../node_modules/react-native-linear-gradient"
+  DoubleConversion:
+    :podspec: "../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec"
+  Folly:
+    :podspec: "../node_modules/react-native/third-party-podspecs/Folly.podspec"
+  glog:
+    :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
+  React:
+    :path: "../node_modules/react-native"
+  react-native-camera:
+    :path: "../node_modules/react-native-camera"
+  react-native-image-resizer:
+    :path: "../node_modules/react-native-image-resizer"
+  RNAccountKit:
+    :path: "../node_modules/react-native-facebook-account-kit/ios"
+  RNDeviceInfo:
+    :path: "../node_modules/react-native-device-info"
+  RNSVG:
+    :path: "../node_modules/react-native-svg"
+  yoga:
+    :path: "../node_modules/react-native/ReactCommon/yoga/yoga.podspec"
+
+SPEC CHECKSUMS:
+  AccountKit: 870ccaf5d33facda9408783e28fbe68c5211e069
+  boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
+  BVLinearGradient: 6d8909e3fc6b089defa4b89d967441fa6827a2ee
+  DoubleConversion: a9706f16e388b53ff12cca34473428ee29746a26
+  Folly: c89ac2d5c6ab169cd7397ef27485c44f35f742c7
+  glog: b3b0330915eccea41c5cc9731a77cf564a9be5ea
+  React: 1fe0eb13d90b625d94c3b117c274dcfd2e760e11
+  react-native-camera: ec435a5b2498faa288b4574e005d5c1021f18608
+  react-native-image-resizer: 04a3409e7d4ad646c4468671c69dec490def139c
+  RNAccountKit: 3dd31fff73c90378ac89dc7611da0dc22b29f84b
+  RNDeviceInfo: 568c5641057313b4912d08a7742ff0b2f753ed5c
+  RNSVG: 6252323c0312735f0af5f58b5adf2965b6a9ffbf
+  yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
+
+PODFILE CHECKSUM: 76a050ac57c97adc040338313569bb2371de973f
+
+COCOAPODS: 1.5.3
