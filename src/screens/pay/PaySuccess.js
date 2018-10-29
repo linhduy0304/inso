@@ -47,7 +47,7 @@ class PaySuccess extends Component {
   }
 
   render() {
-    const {email,} = this.state
+    const {email,} = this.state;
     return (
       <View style={[Css.container, {backgroundColor: '#f7f7f7',}]}>
         <LinearGradient

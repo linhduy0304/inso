@@ -72,12 +72,12 @@ const Root = () => (
         <Scene key="carClaimDamage" hideNavBar={true} component={CarClaimDamage}/>
         <Scene key="carClaimCalendar" hideNavBar={true} component={CarClaimCalendar}/>
         <Scene key="carClaimGaraOther" hideNavBar={true} component={CarClaimGaraOther}/>
-        <Scene key="carClaimGara" hideNavBar={true} component={CarClaimGara}/>
+        <Scene key="carClaimGara" initial={true} hideNavBar={true} component={CarClaimGara}/>
         <Scene key="carClaimQuestion"  hideNavBar={true} component={CarClaimQuestion}/>
         <Scene key="carClaimRegistration" hideNavBar={true} component={CarClaimRegistration}/>
 
         <Scene key="contractInfo" hideNavBar={true} component={ContractInfo}/>
-        <Scene key="contractClaim" initial={true} hideNavBar={true} component={ContractClaim}/>
+        <Scene key="contractClaim"  hideNavBar={true} component={ContractClaim}/>
         
         <Scene key="notify" hideNavBar={true} component={Notify}/>
         <Scene key="payList" hideNavBar={true} component={PayList}/>

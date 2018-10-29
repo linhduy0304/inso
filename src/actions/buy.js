@@ -21,6 +21,13 @@ export const sendEmail = (body) => {
       .then(res => {
         switch(res.result_code) {
           case '0000':
+            Alert.alert(
+              'Thông báo!',
+              'Hệ thống đã gửi giấy chứng nhận điện tử đến email của bạn',
+              [
+                {text: 'OK'},
+              ],
+            )
             Actions.tab({type: 'reset'})
             return;
           case '1001':
