@@ -40,6 +40,7 @@ import CarClaimQuestion from './car/screens/claim/CarClaimQuestion';
 import CarClaimRegistration from './car/screens/claim/CarClaimRegistration';
 import CarClaimList from './car/screens/claim/CarClaimList';
 import ContractClaim from './screens/contract/ContractClaim';
+import CarClaimCorner from './car/screens/claim/CarClaimCorner';
 
 const store = createStore(reducer, applyMiddleware(thunk)) 
 
@@ -68,13 +69,14 @@ const Root = () => (
 
         <Scene key="carClaimList" hideNavBar={true} component={CarClaimList}/>
         <Scene key="carClaimPick" hideNavBar={true} component={CarClaimPick}/>
-        <Scene key="carClaimRequirement" hideNavBar={true} component={CarClaimRequirement}/>
+        <Scene key="carClaimRequirement" initial={true} hideNavBar={true} component={CarClaimRequirement}/>
         <Scene key="carClaimDamage" hideNavBar={true} component={CarClaimDamage}/>
-        <Scene key="carClaimCalendar" hideNavBar={true} component={CarClaimCalendar}/>
+        <Scene key="carClaimCalendar"  hideNavBar={true} component={CarClaimCalendar}/>
         <Scene key="carClaimGaraOther" hideNavBar={true} component={CarClaimGaraOther}/>
-        <Scene key="carClaimGara" initial={true} hideNavBar={true} component={CarClaimGara}/>
+        <Scene key="carClaimGara"  hideNavBar={true} component={CarClaimGara}/>
         <Scene key="carClaimQuestion"  hideNavBar={true} component={CarClaimQuestion}/>
         <Scene key="carClaimRegistration" hideNavBar={true} component={CarClaimRegistration}/>
+        <Scene key="carClaimCorner" initial={true} hideNavBar={true} component={CarClaimCorner}/>
 
         <Scene key="contractInfo" hideNavBar={true} component={ContractInfo}/>
         <Scene key="contractClaim"  hideNavBar={true} component={ContractClaim}/>

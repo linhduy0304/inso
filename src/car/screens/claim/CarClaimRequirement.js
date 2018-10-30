@@ -32,43 +32,42 @@ class CarClaimRequirement extends Component {
 			})
 		}
 	};
- 
   
 
-  render() {
-    const {data} = this.state;
-    return (
-		<View style={Css.container}>
-		{
-			this.props.carClaim.loading ?
-			<Loading/>
-			: null
-		}
-		<Nav onPress={() => Actions.pop()} title='Hoàn thiện thủ tục bồi thường'/>
-		<FlatList
-            data = {data}
-            contentContainerStyle={{padding: 20,}}
-            removeClippedSubviews
-            // refreshControl={
-            //   <RefreshControl
-            //       refreshing={refreshing}
-            //       onRefresh={() => this._onRefresh()}
-            //   />
-            // }
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={data => <ItemRequirement data = {data.item}/>}
-        />
-		<FooterButton>
-			<Button
-				label={'GỬI NGAY'}
-				width={(screen.width-40)}
-				marginTop={0}
-				onPress={() => this.save()}
-			/>
-		</FooterButton>
-		</View>
-    );
-  }
+    render() {
+        const {data} = this.state;
+        return (
+            <View style={Css.container}>
+            {
+                this.props.carClaim.loading ?
+                <Loading/>
+                : null
+            }
+            <Nav onPress={() => Actions.pop()} title='Hoàn thiện thủ tục bồi thường'/>
+            <FlatList
+                data = {data}
+                contentContainerStyle={{padding: 20,}}
+                removeClippedSubviews
+                // refreshControl={
+                //   <RefreshControl
+                //       refreshing={refreshing}
+                //       onRefresh={() => this._onRefresh()}
+                //   />
+                // }
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={data => <ItemRequirement data = {data.item}/>}
+            />
+            <FooterButton>
+                <Button
+                    label={'GỬI NGAY'}
+                    width={(screen.width-40)}
+                    marginTop={0}
+                    onPress={() => this.save()}
+                />
+            </FooterButton>
+            </View>
+        );
+    }
 }
 
 import {connect} from 'react-redux';

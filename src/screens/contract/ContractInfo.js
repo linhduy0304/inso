@@ -49,12 +49,20 @@ class ContractInfo extends Component {
     }
   };
 
+  back = () => {
+    if(this.props.back === 'home') {
+      Actions.tab({type: 'reset'});
+    } else {
+      Actions.pop()
+    }
+  }
+
   render() {
     const {intro, check, check1, data} = this.state;
     console.log(data)
     return (
       <View style={Css.container}>
-        <Nav title='Thông tin đăng ký bảo hiểm xe'/>
+        <Nav onPress={() => this.back()} title='Thông tin đăng ký bảo hiểm xe'/>
         {
           this.props.buy.loading ?
             <LoadingSmall/>

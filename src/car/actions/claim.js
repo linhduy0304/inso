@@ -15,6 +15,41 @@ import { Actions } from 'react-native-router-flux';
 let HTTP = require('../../services/HTTP');
 
 
+//updateGarageLinked
+export const updateGarageLinkedSuccess = (data) => {
+  return {
+    type: CAR_CLAIM_GARAGE_SUCCESS,
+    data,
+  }
+}
+
+export const updateGarageLinked = (body) => {
+  return dispatch => {
+    dispatch(request())
+    return HTTP.post(body)
+      .then(res => {
+        console.log(res)
+        switch(res.result_code) {
+          case '0000':
+            dispatch(updateGarageLinkedSuccess(res.result_data.garages));
+            return;
+          case '1001':
+            SimpleToast.show('Hết phiên làm việc. Vui lòng đăng nhập lại')
+            Actions.login({type: 'reset'})
+            dispatch(fail());
+            return;
+          default:
+            SimpleToast.show(res.result_message)
+            dispatch(fail());
+            return;
+        }
+      })
+      .catch((error) => {
+        dispatch(fail())
+      });
+  };
+}
+
 //getListGarage
 export const getListGarageSuccess = (data) => {
   return {

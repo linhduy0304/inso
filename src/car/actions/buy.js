@@ -40,19 +40,12 @@ const HTTP = require('../../services/HTTP');
 
 //confirmExclusion
 export const confirmPriceExclusion = (body) => {
-  console.log(body)
   return dispatch => {
     return HTTP.post(body)
       .then(res => {
-        console.log(res)
         switch(res.result_code) {
           case '0000':
-            Actions.contractInfo({contract_id: body.params.contract_id, load: 'CONTRACT_PAYMENT', payment_amount: res.result_data.payment_amount})
-            // if(res.result_data.confirm_insurance_amount != 0) {
-            //   Actions.carPriceExclusion({contract_id: body.params.contract_id});
-            // }else {
-            //   Actions.contractInfo({contract_id: body.params.contract_id, load: 'CONTRACT_PAYMENT'})
-            // }
+            Actions.contractInfo({back: 'home', contract_id: body.params.contract_id, load: 'CONTRACT_PAYMENT', payment_amount: res.result_data.payment_amount})
             dispatch(fail())
             return;
           case '1001':

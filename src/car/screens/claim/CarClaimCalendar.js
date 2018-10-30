@@ -10,47 +10,62 @@ import { Calendar, CalendarList, Agenda } from '../../../config/react-native-cal
 import DatePicker from 'react-native-datepicker'
 
 class CarClaimCalendar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-        date: '12/12/2018 - 09:00AM',
-        markedDates: {},
-        time: '07:00'
+    constructor(props) {
+        super(props);
+        this.state = {
+            date: '',
+            markedDates: {},
+            time: '07:00'
+        };
+    }
+
+    componentWillMount = () => {
+        // Communications.phonecall('0123456789', true)
+        // var body = {
+        //   function: 'InsoClaimApi_getListTargetsByClaimType',
+        //   params: {
+        //     claim_type_id: this.props.claim_type_id
+        //   },
+        // }
+        // this.props.getListTargetsByClaimType(body)
+        const date = new Date();
+        a = `${date.getFullYear()}-${(date.getMonth()+1)<10 ? '0'+(date.getMonth()+1).toString() : (date.getMonth()+1)}-${date.getDate()}`
+        this.setState({date: a})
     };
-  }
 
-  componentWillMount = () => {
-    // Communications.phonecall('0123456789', true)
-    // var body = {
-    //   function: 'InsoClaimApi_getListTargetsByClaimType',
-    //   params: {
-    //     claim_type_id: this.props.claim_type_id
-    //   },
-    // }
-    // this.props.getListTargetsByClaimType(body)
-    const date = new Date();
-    a = `${date.getFullYear()}-${(date.getMonth()+1)<10 ? '0'+(date.getMonth()+1).toString() : (date.getMonth()+1)}-${date.getDate()}`
-    this.setState({date: a})
-  };
+    getNow() {
+        const date = new Date();
+        a = `${date.getFullYear()}-${(date.getMonth()+1)<10 ? '0'+(date.getMonth()+1).toString() : (date.getMonth()+1)}-${date.getDate()}`
+        return a
+    }
 
-  getNow() {
-    const date = new Date();
-    a = `${date.getFullYear()}-${(date.getMonth()+1)<10 ? '0'+(date.getMonth()+1).toString() : (date.getMonth()+1)}-${date.getDate()}`
-    return a
-  }
+    onDayPress = (date) => {
+        const a ={};
+        a[date] = {selected: true, selectedColor: Color}
+        this.setState({
+        markedDates: a,
+        date
+        })
+    }
 
-  aaa(date) {
-    const a ={};
-    a[date] = {selected: true, selectedColor: Color}
-    this.setState({
-      markedDates: a,
-      date,
-    })
-  }
+    save = () => {
+        const {date, time} = this.state;
+        var body = {
+            function: 'InsoClaimApi_updateGarageLinked',
+            params: {
+                claim_id: 4,
+                garage_id: 4,
+                date_repair: convertDate(date),
+                time_repair: time,
+            },
+        }
+        this.props.updateGarageLinked(body)
+    }
   
 
   render() {
-    const {time, intro, open, date} = this.state;
+      console.log(this.state)
+    const {time} = this.state;
     return (
 		<View style={Css.container}>
             {
@@ -84,7 +99,7 @@ class CarClaimCalendar extends Component {
                         current={this.getNow()}
                         minDate={this.getNow()}
                         maxDate={'2100-08-30'}
-                        onDayPress={(day) => this.aaa(day.dateString)}
+                        onDayPress={(day) => this.onDayPress(day.dateString)}
                         onDayLongPress={(day) => {console.log('selected day', day)}}
                         monthFormat={'MM /yyyy'}
                         onMonthChange={(month) => {console.log('month changed', month)}}
@@ -120,7 +135,6 @@ class CarClaimCalendar extends Component {
                 </View>
             </ScrollView>
             <FooterButton>
-                   
                 <Button
                     label={'XÁC NHẬN'}
                     width={(screen.width-40)}
@@ -151,10 +165,10 @@ const styles = StyleSheet.create({
   })
 
 import {connect} from 'react-redux';
-import {getListTargetsByClaimType} from '../../actions/claim';
+import {updateGarageLinked} from '../../actions/claim';
 import { screen, Color, TxtBlack, TxtGrey } from '../../../config/System';
 import { Actions } from 'react-native-router-flux';
-import ButtonNoColor from '../../../components/ButtonNoColor';
+import { convertDate } from '../../../components/Functions';
 
 const mapStateToProps = (state) => {
   return {
@@ -163,7 +177,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    getListTargetsByClaimType: (body) => dispatch(getListTargetsByClaimType(body)),
+    updateGarageLinked: (body) => dispatch(updateGarageLinked(body)),
   }
 }
 

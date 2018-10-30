@@ -28,7 +28,8 @@ class CarClaimGara extends Component {
             ],
             cities: [],
             city: '1000018',
-            garages: []
+            garages: [],
+            keyword: '',
         };
     }
 
@@ -50,12 +51,13 @@ class CarClaimGara extends Component {
     };
     
     search = () => {
+        const {keyword, city} = this.state;
         var body = {
             function: 'InsoClaimApi_getListGarage',
                 params: {
                     claim_id: 4,
-                    city_id: '1001',
-                    keyword: 'aa'
+                    city_id: city,
+                    keyword
                 },
             }	
             this.props.getListGarage(body)
@@ -73,7 +75,6 @@ class CarClaimGara extends Component {
                 <Nav onPress={() => Actions.pop()} title='Tìm Gara sửa chữa'/>
                     <ScrollView>
                         <View style={{padding: 20, flex: 1}}>
-                            
                             <View style={{flex: 1, backgroundColor: '#fff', padding: 15}}>
                                 <View style={styles.ctSearch}>
                                     <TextInput
@@ -85,13 +86,15 @@ class CarClaimGara extends Component {
                                         }}
                                         onSubmitEditing={this.search}
                                     />
-                                    <Image style={{ height: 20, width: 20*30/31}} source={require('../../../icons/ic_search.png')}/>
+                                    <TouchableOpacity onPress={this.search}>
+                                        <Image style={{ height: 20, width: 20*30/31}} source={require('../../../icons/ic_search.png')}/>
+                                    </TouchableOpacity>
                                 </View>
                                 <View style={{borderBottomWidth: 1, width: (screen.width-60)/2, borderBottomColor: '#d7d7d7' }}>
                                     <Picker
                                         selectedValue={this.state.city}
                                         style={{ height: 50, width: (screen.width-80)/2, }}
-                                        onValueChange={(itemValue, itemIndex) => this.setState({city: itemValue})}>
+                                        onValueChange={(item, index) => this.setState({city: item})}>
                                         {
                                             cities.map((item, index) => {
                                                 return (
@@ -112,7 +115,7 @@ class CarClaimGara extends Component {
                                         <Text style={[styles.txtPick, {color: pick === 0 ? Color : TxtBlack}]}>Garage khác</Text>
                                     </TouchableOpacity>
                                 </View>
-                                <Text style={{color: '#333'}}>Có gần bạn nhất</Text>
+                                <Text style={{color: '#333', marginTop: 10}}>Có gần bạn nhất</Text>
                                 {
                                     gara.map((item, index) => {
                                         return <ItemGara key={index} data={item}/>
