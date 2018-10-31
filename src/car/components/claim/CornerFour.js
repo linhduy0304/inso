@@ -29,7 +29,7 @@ class CornerFour extends Component {
   }
 
   render() {
-    const {corner} = this.props.carBuy.profile
+    const {corner} = this.props.carClaim.profile
     return (
       <View style={css.ct}>
         <TouchableOpacity onPress={() => this.onPress()} style={css.ctImage}>
@@ -88,7 +88,7 @@ import {connect} from 'react-redux';
 
 const mapStateToProps = (state) => {
   return {
-    carBuy: state.carBuy
+    carClaim: state.carClaim
   }
 }
 

@@ -40,12 +40,11 @@ class CarCorner extends Component {
   }
 
   handleBackPress = () => {
-    console.log('aaa')
+    
     return false;
   }
 
   save() {
-    console.log(this.props.carBuy.profile)
     const {corner}= this.props.carBuy.profile
     var body = {
       function: 'InsoContractApi_updateContractProfile',
@@ -127,6 +126,7 @@ import CornerThree from '../../components/requirement/CornerThree';
 import CornerFour from '../../components/requirement/CornerFour';
 import CornerFive from '../../components/requirement/CornerFive';
 import ModalShowImage from '../../components/buy/ModalShowImage';
+import { Actions } from 'react-native-router-flux';
 
 
 const mapStateToProps = (state) => {

@@ -12,24 +12,42 @@ class ItemRequirement extends Component {
     };
   }
 
+  componentWillMount = () => {
+    var body = {
+      "function": "InsoContractApi_getFormProfileData",
+      "params": {
+        "contract_id": this.props.contract_id,
+        "form_code": this.props.data.code
+      },
+    }
+    console.log(body)
+    this.props.getFormProfileData(body)
+  };
+
   renderImage = (type) => {
     switch(type) {
-      case 'CAR':
-        return require('../../../icons/ic_registration_2.png');
-      case 'INSO_AIRLINE':
-        return require('../../../icons/ic_oto_3.png');
-      case 'INSO_HEALTH':
-        return require('../../../icons/ic_oto_2.png');
-      case 'INSO_LOVE':
-        return require('../../../icons/ic_scan.png');
+      case 'FORM_DRIVER_LICENSE':
+        return <Image style={{ width: 25, resizeMode: 'contain'}} source={require('../../../icons/ic_registration_2.png')}/>;
+      case 'FORM_IMAGE_SCENE':
+        return <Image style={css.icon} source={require('../../../icons/ic_oto_3.png')}/>;
+      case 'FORM_IMAGE_CAR':
+        return <Image style={css.icon} source={require('../../../icons/ic_oto_2.png')}/>;
+      case 'FORM_IMAGE_DAMAGE':
+        return <Image style={{ width: 20, resizeMode: 'contain'}} source={require('../../../icons/ic_scan.png')}/>;
       default:
         return;
     }
   }
 
-  onPress = () => {
-      
-  }
+    onPress = (data) => {
+        switch(data.code) {
+            case 'FORM_IMAGE_CAR':
+                Actions.carClaimCorner();
+                return;
+            default:
+                return;
+        } 
+    }
 
   render() {
     const {data} = this.props;
@@ -38,7 +56,7 @@ class ItemRequirement extends Component {
             <TouchableOpacity onPress={() => this.onPress(data)} style={css.ct}>
             <Gradient>
                 <View style={css.ctIcon}>
-                <Image style={css.icon} source={this.renderImage(data.code)} />
+                  {this.renderImage(data.code)}
                 </View>
             </Gradient>
             <View style={{flex: 1, marginLeft: 10}}>
@@ -80,4 +98,17 @@ const css = StyleSheet.create({
     },
   })
 
-export default ItemRequirement;
+import {connect} from 'react-redux';
+import {getFormProfileData} from '../../actions/claim';
+
+const mapStateToProps = (state) => {
+  return {
+    carClaim: state.carClaim
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getFormProfileData: (body) => dispatch(getFormProfileData(body)),
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ItemRequirement);

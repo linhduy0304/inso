@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
-class CornerFour extends Component {
+class CornerTwo extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,16 +20,16 @@ class CornerFour extends Component {
     if(this.props.image) {
       var image = {
         uri: this.props.image,
-        active: 4,
+        active: 2,
       }
       this.props.showImage(image)
     }else {
-      Actions.takePhoto({active: 4, action: 'FORM_IMAGE_CAR'})
+      Actions.takePhoto({active: 2, action: 'FORM_IMAGE_CAR'})
     }
   }
 
   render() {
-    const {corner} = this.props.carBuy.profile
+    const {corner} = this.props.carClaim.profile
     return (
       <View style={css.ct}>
         <TouchableOpacity onPress={() => this.onPress()} style={css.ctImage}>
@@ -41,18 +41,18 @@ class CornerFour extends Component {
           <Image style={css.icCamera} source={require('../../../icons/ic_camera.png')}/>
         </TouchableOpacity>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <Text style={css.txt}>Góc 4</Text>
-            {
-                corner.IMAGE_4.reason ?
-                    <Image style={{marginLeft: 4, width: 15, height: 15*25/26}} source={require('../../../icons/ic_error.png')}/>
-                : null
-            }
-			</View>
-			{
-				corner.IMAGE_4.reason ? 
-					<Text style={[css.txt, {color: '#5c5c5c', maxWidth: 80}]}>{corner.IMAGE_4.reason}</Text>
-				: null
-			}
+        <Text style={css.txt}>Góc 2</Text>
+        {
+            corner.IMAGE_2.reason ?
+                <Image style={{marginLeft: 4, width: 15, height: 15*25/26}} source={require('../../../icons/ic_error.png')}/>
+            : null
+        }
+        </View>
+        {
+            corner.IMAGE_2.reason ? 
+                <Text style={[css.txt, {color: '#5c5c5c', maxWidth: 80}]}>{corner.IMAGE_2.reason}</Text>
+            : null
+        }
       </View>
     );
   }
@@ -78,9 +78,9 @@ const css = StyleSheet.create({
   },
   ct: {
     position: 'absolute',
-    bottom: 20,
+    top: 20,
     alignItems: 'center',
-    right: 20
+    left: 20
   },
 })
 
@@ -88,9 +88,7 @@ import {connect} from 'react-redux';
 
 const mapStateToProps = (state) => {
   return {
-    carBuy: state.carBuy
+    carClaim: state.carClaim
   }
 }
-
-
-export default connect(mapStateToProps)(CornerFour);
+export default connect(mapStateToProps)(CornerTwo);

@@ -16,8 +16,8 @@ const ItemGara = ({
 
 const css = StyleSheet.create({
     icon: {
-        height: 40,
-        width: 40
+        height: 35,
+        width: 35
     },
     ct: {
         flexDirection: 'row',

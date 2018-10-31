@@ -12,8 +12,11 @@ import Css from '../../../config/Css';
 import Button from '../../../components/Button';
 import FooterButton from '../../../components/FooterButton';
 import { screen } from '../../../config/System';
-import CornerOne from '../../components/requirement/CornerOne';
-import CornerTwo from '../../components/requirement/CornerTwo';
+import CornerOne from '../../components/claim/CornerOne';
+import CornerTwo from '../../components/claim/CornerTwo';
+import CornerThree from '../../components/claim/CornerThree';
+import CornerFour from '../../components/claim/CornerFour';
+import CornerFive from '../../components/claim/CornerFive';
 import Modal from '../../components/Modal';
 import Loading from '../../../components/Loading';
 
@@ -76,12 +79,12 @@ class CarClaimCorner extends Component {
   }
 
   render() {
-    console.log(this.props.carBuy.profile)
+    console.log(this.props.carClaim.profile)
     const {open, openImage, image} = this.state;
     return (
       <View style={Css.container}>
         {
-          this.props.carBuy.loading ?
+          this.props.carClaim.loading ?
           <Loading/>
           : null
         }
@@ -127,15 +130,13 @@ class CarClaimCorner extends Component {
 import {connect} from 'react-redux';
 import {updateContract} from '../../actions/buy';
 import Nav from '../../../components/Nav';
-import CornerThree from '../../components/requirement/CornerThree';
-import CornerFour from '../../components/requirement/CornerFour';
-import CornerFive from '../../components/requirement/CornerFive';
+
 import ModalShowImage from '../../components/buy/ModalShowImage';
 
 
 const mapStateToProps = (state) => {
   return {
-    carBuy: state.carBuy
+    carClaim: state.carClaim
   }
 }
 const mapDispatchToProps = (dispatch) => {

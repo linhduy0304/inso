@@ -10,7 +10,9 @@ class CarClaimPick extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: []
+	  data: [],
+	  show: false,
+	  car: {},
     };
   }
 
@@ -26,24 +28,32 @@ class CarClaimPick extends Component {
 
 	componentWillReceiveProps = (nextProps) => {
 		if(nextProps.carClaim.targets && this.props.carClaim.targets != nextProps.carClaim.targets) {
-		this.setState({
-			data: nextProps.carClaim.targets
-		})
+			this.setState({
+				data: nextProps.carClaim.targets
+			})
 		}
 	};
+
+	onPress = (data) => {
+		this.setState({
+			car: data,
+			show: false
+		})
+	}
 
 	send = () => {
 		var body = {
 			function: 'InsoClaimApi_addClaim',
 			params: {
-			claim_type_id: this.props.claim_type_id
+				claim_type_id: this.props.claim_type_id,
+				contract_id: this.state.car.contract_id,
 			},
 		}
 		this.props.addClaim(body)
 	}
 
   render() {
-    const {data} = this.state;
+    const {data, show, car} = this.state;
     return (
 		<View style={Css.container}>
 		{
@@ -61,14 +71,22 @@ class CarClaimPick extends Component {
 					</View>
 					: null
 				}
-				<TouchableOpacity style={styles.ctPick}>
-					<Text>Chọn ô tô đã đăng ký bảo hiểm</Text>
+				<TouchableOpacity onPress={() => this.setState({show: !this.state.show})} style={styles.ctPick}>
+					<Text>{car.name ? car.name : 'Chọn ô tô đã đăng ký bảo hiểm'}</Text>
 					<Image style={{ width: 10, height: 10*9/17}} source={require('../../../icons/ic_down.png')}/>
 				</TouchableOpacity>
-				<View style={{ flexDirection: 'row', borderBottomWidth: 1, paddingVertical: 15, alignItems: 'center', borderBottomColor: '#dedede' }}>
-					<Image source={require('../../../icons/ic_oto_4.png')}/>
-					<Text style={{ color: '#333', flex: 1, marginLeft: 15}}>dddd</Text>
-				</View>
+				{
+					show ? 
+						data.map((item, index) => {
+							return (
+								<TouchableOpacity onPress={() => this.onPress(item)} key={index} style={{ flexDirection: 'row', borderBottomWidth: 1, paddingVertical: 15, alignItems: 'center', borderBottomColor: '#dedede' }}>
+									<Image source={require('../../../icons/ic_oto_4.png')}/>
+									<Text style={{ color: '#333', flex: 1, marginLeft: 15}}>{item.name}</Text>
+								</TouchableOpacity>
+							)
+						})
+					: null
+				}
 			</View>
 		</ScrollView>
 		<FooterButton>

@@ -21,7 +21,7 @@ class Claim extends Component {
 
   componentWillMount = () => {
     var body = {
-      function: 'InsoClaimApi_getListClaimType',
+      function: 'InsoClaimApi_getListClaim',
       params: {
       },
     }
@@ -51,7 +51,7 @@ class Claim extends Component {
       refreshing: true,
     });
     var body = {
-      function: 'InsoContractApi_getListContract',
+      function: 'InsoClaimApi_getListClaim',
       params: {
       },
     }

@@ -29,6 +29,7 @@ class CornerTwo extends Component {
   }
 
   render() {
+    const {corner} = this.props.carBuy.profile
     return (
       <View style={css.ct}>
         <TouchableOpacity onPress={() => this.onPress()} style={css.ctImage}>
@@ -39,7 +40,19 @@ class CornerTwo extends Component {
           }
           <Image style={css.icCamera} source={require('../../../icons/ic_camera.png')}/>
         </TouchableOpacity>
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
         <Text style={css.txt}>Góc 2</Text>
+        {
+            corner.IMAGE_2.reason ?
+                <Image style={{marginLeft: 4, width: 15, height: 15*25/26}} source={require('../../../icons/ic_error.png')}/>
+            : null
+        }
+        </View>
+        {
+            corner.IMAGE_2.reason ? 
+                <Text style={[css.txt, {color: '#5c5c5c', maxWidth: 80}]}>{corner.IMAGE_2.reason}</Text>
+            : null
+        }
       </View>
     );
   }
@@ -71,4 +84,11 @@ const css = StyleSheet.create({
   },
 })
 
-export default CornerTwo;
+import {connect} from 'react-redux';
+
+const mapStateToProps = (state) => {
+  return {
+    carBuy: state.carBuy
+  }
+}
+export default connect(mapStateToProps)(CornerTwo);

@@ -53,7 +53,7 @@ export const getPayStatus = (body) => {
         switch(res.result_code) {
           case '0000':
             if(res.result_data.payment_status.code == 'PAYMENT_STATUS_PAID') {
-              Actions.paySuccess({contract_id: body.params.contract_id})
+              Actions.paySuccess({contract_id: body.params.contract_id, back: 'home'})
             }
             return;
           case '1001':

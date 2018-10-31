@@ -7,7 +7,6 @@ import {
 import { Actions } from 'react-native-router-flux';
 import Css from '../../../config/Css';
 import Nav from '../../../components/Nav';
-import ItemClaim from '../../../components/claim/ItemClaim';
 import LoadingSmall from '../../../components/LoadingSmall';
 
 class CarClaimList extends Component {
@@ -25,13 +24,13 @@ class CarClaimList extends Component {
       params: {
       },
     }
-    this.props.loadClaim(body)
+    this.props.getListClaimType(body)
   };
 
   componentWillReceiveProps = (nextProps) => {
-    if(nextProps.claim.claim) {
+    if(nextProps.carClaim.listType) {
       this.setState({
-        data: nextProps.claim.claim
+        data: nextProps.carClaim.listType
       })
     }
   };
@@ -51,11 +50,11 @@ class CarClaimList extends Component {
       refreshing: true,
     });
     var body = {
-      function: 'InsoContractApi_getListContract',
+      function: 'InsoClaimApi_getListClaimType',
       params: {
       },
     }
-    this.props.loadClaim(body)
+    this.props.getListClaimType(body)
     this.setState({
       refreshing: false,
     })
@@ -67,7 +66,7 @@ class CarClaimList extends Component {
       <View style={Css.container}>
         <Nav onPress={() => Actions.pop()} title='Bồi thường bảo hiểm'/>
         {
-          this.props.claim.loading ?
+          this.props.carClaim.loading ?
             <LoadingSmall/>
           : null
         }
@@ -83,7 +82,7 @@ class CarClaimList extends Component {
             //   />
             // }
             keyExtractor={(item, index) => index.toString()}
-            renderItem={data => <ItemClaim data = {data.item}/>}
+            renderItem={data => <ItemType data = {data.item}/>}
           />
         </View>
       </View>
@@ -92,17 +91,18 @@ class CarClaimList extends Component {
 }
 
 import {connect} from 'react-redux';
-import {loadClaim} from '../../../actions/claim';
+import {getListClaimType} from '../../actions/claim';
 import { screen } from '../../../config/System';
+import ItemType from '../../components/claim/ItemType';
 
 const mapStateToProps = (state) => {
   return {
-    claim: state.claim
+    carClaim: state.carClaim
   }
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    loadClaim: (body) => dispatch(loadClaim(body)),
+    getListClaimType: (body) => dispatch(getListClaimType(body)),
   }
 }
 

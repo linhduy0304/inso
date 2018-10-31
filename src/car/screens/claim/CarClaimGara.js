@@ -30,6 +30,7 @@ class CarClaimGara extends Component {
             city: '1000018',
             garages: [],
             keyword: '',
+            showGara: null,
         };
     }
 
@@ -48,6 +49,11 @@ class CarClaimGara extends Component {
                 cities: nextProps.carClaim.cities
             })
         }
+        if(nextProps.carClaim.garages && this.props.carClaim.garages !== nextProps.carClaim.garages) {
+            this.setState({
+                garages: nextProps.carClaim.garages
+            })
+        }
     };
     
     search = () => {
@@ -55,16 +61,17 @@ class CarClaimGara extends Component {
         var body = {
             function: 'InsoClaimApi_getListGarage',
                 params: {
-                    claim_id: 4,
+                    claim_id: 5,
                     city_id: city,
                     keyword
                 },
             }	
-            this.props.getListGarage(body)
+        this.props.getListGarage(body);
+        this.setState({ showGara: true })
     }
 
     render() {
-        const {pick, gara, cities, city} = this.state;
+        const {pick, garages, cities, showGara} = this.state;
         return (
             <View style={Css.container}>
                 {
@@ -108,18 +115,24 @@ class CarClaimGara extends Component {
                                 <View style={{flexDirection: 'row', borderBottomWidth: 1, borderBottomColor: '#d7d7d7'}}>
                                     <TouchableOpacity onPress={() => this.setState({pick: 1})} style={styles.ctItemPick}>
                                         <View style={pick === 1 ? styles.ctPickAcitve : styles.ctPick}/>
-                                        <Text style={[styles.txtPick, {color: pick === 1 ? Color : TxtBlack}]}>Garage liên kết với INSO</Text>
+                                        <Text style={[styles.txtPick, {color: TxtBlack}]}>Garage liên kết với INSO</Text>
                                     </TouchableOpacity>
                                     <TouchableOpacity onPress={() => this.setState({pick: 0})} style={styles.ctItemPick}>
                                         <View style={pick === 0 ? styles.ctPickAcitve : styles.ctPick}/>
-                                        <Text style={[styles.txtPick, {color: pick === 0 ? Color : TxtBlack}]}>Garage khác</Text>
+                                        <Text style={[styles.txtPick, {color: TxtBlack}]}>Garage khác</Text>
                                     </TouchableOpacity>
                                 </View>
-                                <Text style={{color: '#333', marginTop: 10}}>Có gần bạn nhất</Text>
                                 {
-                                    gara.map((item, index) => {
-                                        return <ItemGara key={index} data={item}/>
-                                    })
+                                    showGara ?
+                                        <View>
+                                            <Text style={{color: '#333', marginTop: 10}}>Có <Text style={{ color: Color, fontWeight: 'bold'}}>{garages.length} Garage </Text>gần bạn nhất</Text>
+                                            {
+                                                garages.map((item, index) => {
+                                                    return <ItemGara key={index} data={item}/>
+                                                })
+                                            }
+                                        </View>
+                                    : null
                                 }
                             </View>
                         </View>

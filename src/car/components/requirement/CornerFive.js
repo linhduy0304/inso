@@ -29,6 +29,7 @@ class CornerFive extends Component {
   }
 
   render() {
+    const {corner} = this.props.carBuy.profile
     return (
       <View style={css.ct}>
         <TouchableOpacity onPress={() => this.onPress()} style={css.ctImage}>
@@ -39,7 +40,20 @@ class CornerFive extends Component {
           }
           <Image style={css.icCamera} source={require('../../../icons/ic_camera.png')}/>
         </TouchableOpacity>
-        <Text style={css.txt}>Tem đăng kiểm</Text>
+        
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <Text style={css.txt}>Tem đăng kiểm</Text>
+            {
+                corner.IMAGE_5.reason ?
+                    <Image style={{marginLeft: 4, width: 15, height: 15*25/26}} source={require('../../../icons/ic_error.png')}/>
+                : null
+            }
+			</View>
+			{
+				corner.IMAGE_5.reason ? 
+					<Text style={[css.txt, {color: '#5c5c5c', maxWidth: 80}]}>{corner.IMAGE_5.reason}</Text>
+				: null
+			}
       </View>
     );
   }
@@ -70,4 +84,11 @@ const css = StyleSheet.create({
   },
 })
 
-export default CornerFive;
+import {connect} from 'react-redux';
+
+const mapStateToProps = (state) => {
+  return {
+    carBuy: state.carBuy
+  }
+}
+export default connect(mapStateToProps)(CornerFive);

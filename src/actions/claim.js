@@ -38,7 +38,7 @@ export const loadClaim = (body) => {
         console.log(res)
         switch(res.result_code) {
           case '0000':
-            dispatch(loadClaimSuccess(res.result_data.claim_types));
+            dispatch(loadClaimSuccess(res.result_data.claims));
             return;
           case '1001':
             SimpleToast.show('Hết phiên làm việc. Vui lòng đăng nhập lại')

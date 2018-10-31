@@ -29,6 +29,7 @@ class CornerThree extends Component {
   }
 
   render() {
+    const {corner} = this.props.carBuy.profile
     return (
       <View style={css.ct}>
         <TouchableOpacity onPress={() => this.onPress()} style={css.ctImage}>
@@ -39,7 +40,20 @@ class CornerThree extends Component {
           }
           <Image style={css.icCamera} source={require('../../../icons/ic_camera.png')}/>
         </TouchableOpacity>
-        <Text style={css.txt}>Góc 3</Text>
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <Text style={css.txt}>Góc 3</Text>
+            {
+                corner.IMAGE_3.reason ?
+                    <Image style={{marginLeft: 4, width: 15, height: 15*25/26}} source={require('../../../icons/ic_error.png')}/>
+                : null
+            }
+			</View>
+			{
+				corner.IMAGE_3.reason ? 
+					<Text style={[css.txt, {color: '#5c5c5c', maxWidth: 80}]}>{corner.IMAGE_3.reason}</Text>
+				: null
+			}
+        
       </View>
     );
   }
@@ -70,5 +84,11 @@ const css = StyleSheet.create({
     right: 20
   },
 })
+import {connect} from 'react-redux';
 
-export default CornerThree;
+const mapStateToProps = (state) => {
+  return {
+    carBuy: state.carBuy
+  }
+}
+export default connect(mapStateToProps)(CornerThree);

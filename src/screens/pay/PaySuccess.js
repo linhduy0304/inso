@@ -8,7 +8,8 @@ import {
   TouchableOpacity,
   ScrollView,
   TextInput,
-  Keyboard
+  Keyboard,
+  BackHandler
 } from 'react-native';
 import Css from '../../config/Css';
 import FooterButton from '../../components/FooterButton';
@@ -16,13 +17,35 @@ import Button from '../../components/Button';
 import { screen } from '../../config/System';
 import SimpleToast from 'react-native-simple-toast';
 import LinearGradient from 'react-native-linear-gradient';
-import {validateEmail} from '../../components/Functions'
+import {validateEmail} from '../../components/Functions';
+
 class PaySuccess extends Component {
   constructor(props) {
     super(props);
     this.state = {
       email: '',
     };
+  }
+
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackPress);
+  }
+
+  handleBackPress = () => {
+    Actions.tab({type: 'reset'})
+    return true;
+  }
+
+  back = () => {
+    if(this.props.back === 'home') {
+        Actions.tab({type: 'reset'})
+    }else {
+        Actions.pop()
+    }
   }
 
   next = () => {
@@ -58,7 +81,7 @@ class PaySuccess extends Component {
           colors={['#0bc5b8','#1ed29f','#1dd1a1','#2bda8f']} >
           <View style={styles.ctNav}>
             <Text style={styles.title}>Thanh toán thành công</Text>
-            <TouchableOpacity onPress={() => Actions.pop()} style={styles.ctBack}>
+            <TouchableOpacity onPress={this.back} style={styles.ctBack}>
               <Image style={styles.icBack} source={require('../../icons/ic_back.png')}/>
             </TouchableOpacity>
           </View>
@@ -156,6 +179,7 @@ const styles = StyleSheet.create({
 
 import {connect} from 'react-redux';
 import { sendEmail} from '../../actions/buy';
+import { Actions } from 'react-native-router-flux';
 
 const mapStateToProps = (state) => {
   return {

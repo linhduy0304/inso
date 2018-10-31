@@ -31,10 +31,21 @@ class CarClaimRequirement extends Component {
 			  data: nextProps.carClaim.requirements
 			})
 		}
-	};
+    };
+    
+    save = () => {
+        var body = {
+            function: 'InsoClaimApi_updateStatusClaimProfileRequest',
+            params: {
+                claim_id: this.props.claim_id
+            },
+            }
+            this.props.updateStatusClaimProfileRequest(body)
+    }
   
 
     render() {
+        console.log(this.props.carClaim.profile)
         const {data} = this.state;
         return (
             <View style={Css.container}>
@@ -55,14 +66,14 @@ class CarClaimRequirement extends Component {
                 //   />
                 // }
                 keyExtractor={(item, index) => index.toString()}
-                renderItem={data => <ItemRequirement data = {data.item}/>}
+                renderItem={data => <ItemRequirement contract_id={this.props.contract_id} data = {data.item}/>}
             />
             <FooterButton>
                 <Button
                     label={'GỬI NGAY'}
                     width={(screen.width-40)}
                     marginTop={0}
-                    onPress={() => this.save()}
+                    onPress={this.save}
                 />
             </FooterButton>
             </View>
@@ -71,7 +82,7 @@ class CarClaimRequirement extends Component {
 }
 
 import {connect} from 'react-redux';
-import {getClaimRequirement} from '../../actions/claim';
+import {getClaimRequirement, updateStatusClaimProfileRequest} from '../../actions/claim';
 import { screen } from '../../../config/System';
 import { Actions } from 'react-native-router-flux';
 import ItemRequirement from '../../components/claim/ItemRequirement';
@@ -84,6 +95,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getClaimRequirement: (body) => dispatch(getClaimRequirement(body)),
+    updateStatusClaimProfileRequest: (body) => dispatch(updateStatusClaimProfileRequest(body)),
   }
 }
 
