@@ -12,47 +12,46 @@ let HTTP = require('../services/HTTP');
 
 //get list compensation
 export const request = () => {
-  return {
-    type: CLAIM_REQUEST,
-  }
+    return {
+        type: CLAIM_REQUEST,
+    }
 }
 export const loadClaimSuccess = (data) => {
-  return {
-    type:CLAIM_SUCCESS,
-    data,
-  }
+    return {
+        type:CLAIM_SUCCESS,
+        data,
+    }
 }
 
 export const fail = () => {
-  return {
-    type: CLAIM_FAIL,
-  }
+    return {
+        type: CLAIM_FAIL,
+    }
 }
 
 export const loadClaim = (body) => {
-  console.log(body)
-  return dispatch => {
-    dispatch(request())
-    return HTTP.post(body)
-      .then(res => {
-        console.log(res)
-        switch(res.result_code) {
-          case '0000':
-            dispatch(loadClaimSuccess(res.result_data.claims));
-            return;
-          case '1001':
-            SimpleToast.show('Hết phiên làm việc. Vui lòng đăng nhập lại')
-            Actions.login({type: 'reset'})
-            dispatch(fail());
-            return;
-          default:
-            SimpleToast.show(res.result_message)
-            dispatch(fail());
-            return;
-        }
-      })
-      .catch((error) => {
-        dispatch(fail())
-      });
-  };
+    return dispatch => {
+        dispatch(request())
+        return HTTP.post(body)
+        .then(res => {
+            console.log(res)
+            switch(res.result_code) {
+            case '0000':
+                dispatch(loadClaimSuccess(res.result_data.claims));
+                return;
+            case '1001':
+                SimpleToast.show('Hết phiên làm việc. Vui lòng đăng nhập lại')
+                Actions.login({type: 'reset'})
+                dispatch(fail());
+                return;
+            default:
+                SimpleToast.show(res.result_message)
+                dispatch(fail());
+                return;
+            }
+        })
+        .catch((error) => {
+            dispatch(fail())
+        });
+    };
 }

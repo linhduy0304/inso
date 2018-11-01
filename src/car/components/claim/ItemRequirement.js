@@ -14,13 +14,12 @@ class ItemRequirement extends Component {
 
   componentWillMount = () => {
     var body = {
-      "function": "InsoContractApi_getFormProfileData",
+      "function": "InsoClaimApi_getFormProfileData",
       "params": {
-        "contract_id": this.props.contract_id,
+        "claim_id": this.props.claim_id,
         "form_code": this.props.data.code
       },
     }
-    console.log(body)
     this.props.getFormProfileData(body)
   };
 
@@ -42,7 +41,10 @@ class ItemRequirement extends Component {
     onPress = (data) => {
         switch(data.code) {
             case 'FORM_IMAGE_CAR':
-                Actions.carClaimCorner();
+                Actions.carClaimCorner({claim_id: this.props.claim_id, form_code: 'FORM_IMAGE_CAR'});
+                return;
+            case 'FORM_DRIVER_LICENSE':
+                Actions.carClaimCorner({claim_id: this.props.claim_id, form_code: 'FORM_IMAGE_CAR'});
                 return;
             default:
                 return;
@@ -60,8 +62,13 @@ class ItemRequirement extends Component {
                 </View>
             </Gradient>
             <View style={{flex: 1, marginLeft: 10}}>
-                <Text style={{color: '#999', fontSize: 13}}>Bồi thường bảo hiểm</Text>
                 <Text style={{color: '#000', fontSize: 15}}>{data.name}</Text>
+                {
+                data.validate ?
+                <Text style={{color: '#30cecb', fontSize: 12}}>Đã hoàn thành</Text>
+                :
+                <Text style={{color: '#f97c7c', fontSize: 12}}>Chưa hoàn thiện</Text>
+                }
             </View>
             <Image style={{height: 15, width: 15*24/39}} source={require('../../../icons/ic_arrow_right_grey.png')}/>
             </TouchableOpacity>

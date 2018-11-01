@@ -41,6 +41,8 @@ import CarClaimRegistration from './car/screens/claim/CarClaimRegistration';
 import CarClaimList from './car/screens/claim/CarClaimList';
 import ContractClaim from './screens/contract/ContractClaim';
 import CarClaimCorner from './car/screens/claim/CarClaimCorner';
+import CarClaimCamera from './car/screens/claim/CarClaimCamera';
+import CarClaimCameraAgain from './car/screens/claim/CarClaimCameraAgain';
 
 const store = createStore(reducer, applyMiddleware(thunk)) 
 
@@ -69,17 +71,19 @@ const Root = () => (
 
         <Scene key="carClaimList" hideNavBar={true} component={CarClaimList}/>
         <Scene key="carClaimPick" hideNavBar={true} component={CarClaimPick}/>
-        <Scene key="carClaimRequirement" contract_id={'136'} claim_id={5} hideNavBar={true} component={CarClaimRequirement}/>
+        <Scene key="carClaimRequirement" contract_id={'136'} claim_id={22} hideNavBar={true} component={CarClaimRequirement}/>
         <Scene key="carClaimDamage" hideNavBar={true} component={CarClaimDamage}/>
         <Scene key="carClaimCalendar"  hideNavBar={true} component={CarClaimCalendar}/>
         <Scene key="carClaimGaraOther" hideNavBar={true} component={CarClaimGaraOther}/>
-        <Scene key="carClaimGara" initial={true} hideNavBar={true} component={CarClaimGara}/>
+        <Scene key="carClaimGara" hideNavBar={true} component={CarClaimGara}/>
         <Scene key="carClaimQuestion"  hideNavBar={true} component={CarClaimQuestion}/>
         <Scene key="carClaimRegistration" hideNavBar={true} component={CarClaimRegistration}/>
         <Scene key="carClaimCorner" hideNavBar={true} component={CarClaimCorner}/>
+        <Scene key="carClaimCamera" hideNavBar={true} component={CarClaimCamera}/>
+        <Scene key="carClaimCameraAgain" hideNavBar={true} component={CarClaimCameraAgain}/>
 
         <Scene key="contractInfo" hideNavBar={true} component={ContractInfo}/>
-        <Scene key="contractClaim"  hideNavBar={true} component={ContractClaim}/>
+        <Scene key="contractClaim" initial={true} claim_id={22} hideNavBar={true} component={ContractClaim}/>
         
         <Scene key="notify" hideNavBar={true} component={Notify}/>
         <Scene key="payList" hideNavBar={true} component={PayList}/>

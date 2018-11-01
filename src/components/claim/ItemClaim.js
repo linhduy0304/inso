@@ -30,10 +30,10 @@ const renderImage = (type) => {
 }
 
 const onPress = (data) => {
-  switch(data.code) {
-    case "CAR":
-      Actions.carClaimPick({claim_type_id: data.id});
-      return;
+  switch(data.screen) {
+    case "CLAIM_UPDATE_DATA":
+        Actions.carClaimRequirement({claim_id: data.id});
+        return;
     default: 
       return;
   }

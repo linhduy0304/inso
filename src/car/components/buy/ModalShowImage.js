@@ -11,6 +11,7 @@ const ModalShowImage = ({
   onClosed,
   open,
   image,
+  type
 }) => (
   <ModalBox
     isOpen={open}
@@ -26,7 +27,11 @@ const ModalShowImage = ({
         marginTop={20}
         onPress={() => {
           onClosed();
-          Actions.takePhotoAgain({active: image.active, action: 'FORM_IMAGE_CAR'})
+          if(type === 'claim') {
+            Actions.carClaimCameraAgain({active: image.active, action: 'FORM_IMAGE_CAR'})
+          }else {
+            Actions.takePhotoAgain({active: image.active, action: 'FORM_IMAGE_CAR'})
+          }
         }}
         borderRadius={20}
       />

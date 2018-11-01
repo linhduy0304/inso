@@ -24,7 +24,7 @@ class CornerTwo extends Component {
       }
       this.props.showImage(image)
     }else {
-      Actions.takePhoto({active: 2, action: 'FORM_IMAGE_CAR'})
+      Actions.carClaimCamera({active: 2, action: 'FORM_IMAGE_CAR'})
     }
   }
 

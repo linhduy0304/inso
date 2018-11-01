@@ -12,6 +12,7 @@ class CarClaimRequirement extends Component {
     super(props);
     this.state = {
         data: [],
+        open: false,
     };
   }
 
@@ -30,23 +31,41 @@ class CarClaimRequirement extends Component {
 			this.setState({
 			  data: nextProps.carClaim.requirements
 			})
-		}
+        }
+        if(nextProps.carClaim.modalRequirement) {
+            this.setState({
+              open: true
+            })
+        }
     };
+
+    close = () => {
+        this.setState({open: false})
+        this.props.modalClaimRequirement(null)
+        Actions.tab({type: 'reset'})
+      }
     
     save = () => {
         var body = {
-            function: 'InsoClaimApi_updateStatusClaimProfileRequest',
+            function: 'InsoClaimApi_checkClaimRequirement',
             params: {
                 claim_id: this.props.claim_id
             },
             }
-            this.props.updateStatusClaimProfileRequest(body)
+            this.props.checkClaimRequirement(body)
+        // var body = {
+        //     function: 'InsoClaimApi_updateStatusClaimProfileRequest',
+        //     params: {
+        //         claim_id: this.props.claim_id
+        //     },
+        //     }
+        //     this.props.updateStatusClaimProfileRequest(body)
     }
   
 
     render() {
         console.log(this.props.carClaim.profile)
-        const {data} = this.state;
+        const {data, open} = this.state;
         return (
             <View style={Css.container}>
             {
@@ -66,7 +85,7 @@ class CarClaimRequirement extends Component {
                 //   />
                 // }
                 keyExtractor={(item, index) => index.toString()}
-                renderItem={data => <ItemRequirement contract_id={this.props.contract_id} data = {data.item}/>}
+                renderItem={data => <ItemRequirement claim_id={this.props.claim_id} data = {data.item}/>}
             />
             <FooterButton>
                 <Button
@@ -76,16 +95,28 @@ class CarClaimRequirement extends Component {
                     onPress={this.save}
                 />
             </FooterButton>
+            <ModalNoti
+                open={open}
+                onPress={() => this.setState({open: false})}
+                text = 'Gửi hồ sơ bồi thường thành công. Hồ sơ của bạn sẽ được duyệt trong 5 phút'
+                onClosed={() => this.close()}
+            />
             </View>
         );
     }
 }
 
 import {connect} from 'react-redux';
-import {getClaimRequirement, updateStatusClaimProfileRequest} from '../../actions/claim';
+import {
+    getClaimRequirement,
+    updateStatusClaimProfileRequest,
+    modalClaimRequirement,
+    checkClaimRequirement
+} from '../../actions/claim';
 import { screen } from '../../../config/System';
 import { Actions } from 'react-native-router-flux';
 import ItemRequirement from '../../components/claim/ItemRequirement';
+import ModalNoti from '../../../components/ModalNoti';
 
 const mapStateToProps = (state) => {
   return {
@@ -96,6 +127,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getClaimRequirement: (body) => dispatch(getClaimRequirement(body)),
     updateStatusClaimProfileRequest: (body) => dispatch(updateStatusClaimProfileRequest(body)),
+    modalClaimRequirement: (body) => dispatch(modalClaimRequirement(body)),
+    checkClaimRequirement: (body) => dispatch(checkClaimRequirement(body)),
   }
 }
 

@@ -20,12 +20,6 @@ class CarClaimGara extends Component {
         super(props);
         this.state = {
             pick: 1,
-            gara: [
-                {
-                    name: 'ddd',
-                    address: 'aaaaa'
-                }
-            ],
             cities: [],
             city: '1000018',
             garages: [],
@@ -137,13 +131,13 @@ class CarClaimGara extends Component {
                             </View>
                         </View>
                     </ScrollView>
-                <FooterButton>
+                {/* <FooterButton>
                     <Button
-                        label={'GỬI'}
+                        label={'TIẾP TỤC'}
                         width={screen.width-40}
                         marginTop={0}
                     />
-                </FooterButton>
+                </FooterButton> */}
             </View>
         );
     }
@@ -191,6 +185,7 @@ import {getListCity, getListGarage} from '../../actions/claim';
 import { screen, Color, TxtBlack } from '../../../config/System';
 import { Actions } from 'react-native-router-flux';
 import ItemGara from '../../components/claim/ItemGara';
+import Loading from '../../../components/Loading';
 
 const mapStateToProps = (state) => {
   return {

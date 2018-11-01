@@ -1,17 +1,18 @@
 
 import React from 'react';
-import { Text, View, Image, StyleSheet } from 'react-native';
+import { Text, View, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 
 const ItemGara = ({
     data,
 }) => (
-    <View style={css.ct}>
+    <TouchableOpacity onPress={() => Actions.carClaimCalendar({gara: data})} style={css.ct}>
         <Image style={css.icon} source={require('../../../icons/ic_location.png')}/>
         <View style={css.content}>
             <Text style={css.name}>{data.name}</Text>
             <Text style={css.address}>{data.address}</Text>
         </View>
-    </View>
+    </TouchableOpacity>
 );
 
 const css = StyleSheet.create({

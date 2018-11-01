@@ -88,7 +88,6 @@ export const submitPay = (body) => {
     dispatch(request())
     return HTTP.post(body)
       .then(res => {
-        console.log(res)
         switch(res.result_code) {
           case '0000':
             dispatch(submitPaySuccess(res.result_data.payment_url));

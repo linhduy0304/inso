@@ -10,7 +10,8 @@ const ModalNoti = ({
   onClosed,
   open,
   text,
-  onPress
+  onPress,
+  label='ĐỒNG Ý'
 }) => (
   <Modal
     isOpen={open}
@@ -24,7 +25,7 @@ const ModalNoti = ({
       <Text style={{textAlign: 'center',lineHeight: 20, marginLeft: 30, marginRight: 30, color: '#333', marginTop:5}}>{text}</Text>
       {/* <Text style={{color: '#30cecb', fontWeight: 'bold'}}> đ</Text> */}
       <Button 
-        label='ĐỒNG Ý'
+        label={label}
         width={screen.width/2}
         marginTop={20}
         borderRadius={20}

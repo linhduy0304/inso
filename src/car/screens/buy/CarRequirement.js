@@ -82,6 +82,7 @@ class CarRequirement extends Component {
   }
 
   render() {
+    console.log(this.props.carBuy.profile)
     const {data, open} = this.state;
     return (
       <View style={Css.container}>

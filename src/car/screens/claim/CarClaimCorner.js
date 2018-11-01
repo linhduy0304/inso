@@ -48,12 +48,11 @@ class CarClaimCorner extends Component {
   }
 
   save() {
-    console.log(this.props.carBuy.profile)
-    const {corner}= this.props.carBuy.profile
+    const {corner}= this.props.carClaim.profile
     var body = {
-      function: 'InsoContractApi_updateContractProfile',
+      function: 'InsoClaimApi_updateClaimData',
       params: {
-        contract_id: this.props.contract_id, //this.props.contract_id
+        claim_id: this.props.claim_id, //this.props.contract_id
         data: [
           {
             form_code: this.props.form_code,
@@ -68,7 +67,7 @@ class CarClaimCorner extends Component {
         ]
       },
     }
-    this.props.updateContract(body)
+    this.props.updateClaimData(body)
   }
 
   showImage = (image) => {
@@ -81,6 +80,7 @@ class CarClaimCorner extends Component {
   render() {
     console.log(this.props.carClaim.profile)
     const {open, openImage, image} = this.state;
+    const { paths, profile } = this.props.carClaim;
     return (
       <View style={Css.container}>
         {
@@ -96,13 +96,21 @@ class CarClaimCorner extends Component {
                 <Text style={{color: '#323643'}}>Phía trước</Text>
             </View>
             <CornerOne
-              showImage={image => this.showImage(image)}
-              image = {''}
+                showImage={image => this.showImage(image)}
+                image = {paths.IMAGE_1 ? paths.IMAGE_1 : profile.corner.IMAGE_1.value}
             />
-            <CornerTwo showImage={image => this.showImage(image)} image = {''}/>
-            <CornerThree showImage={image => this.showImage(image)} image = {''}/>
-            <CornerFour showImage={image => this.showImage(image)} image = {''}/>
-            <CornerFive showImage={image => this.showImage(image)} image = {''}/>
+            <CornerTwo 
+               showImage={image => this.showImage(image)}
+               image = {paths.IMAGE_2 ? paths.IMAGE_2 : profile.corner.IMAGE_2.value}/>
+            <CornerThree
+                showImage={image => this.showImage(image)}
+                image = {paths.IMAGE_3 ? paths.IMAGE_3 : profile.corner.IMAGE_3.value}/>
+            <CornerFour
+                showImage={image => this.showImage(image)}
+                image = {paths.IMAGE_4 ? paths.IMAGE_4 : profile.corner.IMAGE_4.value}/>
+            <CornerFive
+                showImage={image => this.showImage(image)}
+                image = {paths.IMAGE_5 ? paths.IMAGE_5 : profile.corner.IMAGE_5.value}/>
           </View>
         <FooterButton>
           <Button
@@ -114,6 +122,7 @@ class CarClaimCorner extends Component {
         <ModalShowImage
           open={openImage}
           image={image}
+          type = 'claim'
           onClosed={() => this.setState({openImage: false})}
         />
         <Modal
@@ -128,7 +137,7 @@ class CarClaimCorner extends Component {
 }
 
 import {connect} from 'react-redux';
-import {updateContract} from '../../actions/buy';
+import {updateClaimData} from '../../actions/claim';
 import Nav from '../../../components/Nav';
 
 import ModalShowImage from '../../components/buy/ModalShowImage';
@@ -141,7 +150,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateContract: (body) => dispatch(updateContract(body)),
+    updateClaimData: (body) => dispatch(updateClaimData(body)),
   }
 }
 
